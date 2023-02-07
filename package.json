@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "lodash": "^4.17.21",
+    "mongodb": "^5.0.0",
+    "puppeteer": "^19.6.3",
+    "puppeteer-extra": "^3.3.4",
+    "redis": "^3.1.2",
+    "yargs": "^17.6.2"
+  }
+}

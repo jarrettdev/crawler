@@ -17,6 +17,16 @@ function write_token_to_file(token_str) {
   });
 }
 
+function getDate() {
+  var date = new Date();
+  var dd = String(date.getDate()).padStart(2, '0');
+  var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = date.getFullYear();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  today = mm + '-' + dd + '-' + yyyy + '_' + hours + '-' + minutes + '-' + seconds;
+}
 const crawl = async (entry, options = {}) => {
   debug.crawl('Crawler started');
   console.log('Crawler started');
@@ -38,8 +48,14 @@ const crawl = async (entry, options = {}) => {
   page.on('request', request => {
     if (request.resourceType() === 'xhr') {
       request_url = request.url();
-      token_str = request_url + '\n';
-      write_token_to_file(token_str);
+      requestObject = {
+        "source": page.url(),
+        "XHRUrl": request_url,
+        "method": request.method(),
+
+      }
+
+      write_token_to_file(JSON.stringify(requestObject) + '\n');
 
       // we can block these requests with:
     } else {
