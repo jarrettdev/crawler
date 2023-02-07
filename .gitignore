@@ -43,6 +43,9 @@ jspm_packages/
 # Typescript v1 declaration files
 typings/
 
+# Package
+package-lock.json
+
 # Optional npm cache directory
 .npm
 

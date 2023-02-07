@@ -13,15 +13,19 @@ const debug = {
 
 module.exports = {
   connect: async () => {
-    this.db = await MongoClient.connect('mongodb://localhost:27017/crawler');
+    this.dba = await MongoClient.connect('mongodb://localhost:27017');
     this.client = redis.createClient(
       process.env.REDIS_PORT || 6379,
       process.env.REDIS_HOST || 'localhost'
     );
+    this.db = this.dba.db('crawler');
+    //console.log(this.dba.db('crawler'))
+    debug.db('Connected to db');
+    console.log('Connected to db')
   },
   store: async page => {
     debug.db(`Store page ${page.url}`);
-
+    console.log(`Store page ${page.url}`);
     // We don't need to wait for this
     (async () => {
       debug.mongo('Add page to mongo');
@@ -97,6 +101,6 @@ module.exports = {
 
   close: () => {
     this.client.end(true);
-    this.db.close();
+    //this.client.close();
   },
 };

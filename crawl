@@ -30,9 +30,9 @@ const crawl = require('./crawler');
 
 (async () => {
   await db.connect();
-  if (!argv.resume) {
-    await db.flush();
-  }
+  //if (!argv.resume) {
+  //  await db.flush();
+  //}
   await crawl(argv.url, { maxRadius: argv.maxRadius });
   db.close();
 })();
